@@ -70,7 +70,21 @@
 
         // ✅ โหลดโมเดล OBJ
         const loader = new THREE.OBJLoader();
-        loader.load('model1.obj', function (object) {
+        loader.load('https://raw.githubusercontent.com/Trakanta4556/FileModel/refs/heads/main/model2.obj', function (object) {
+            // ตั้งค่า castShadow กับทุก mesh ใน object
+            object.traverse(function (child) {
+                if (child.isMesh) {
+                    child.castShadow = true;
+                    child.receiveShadow = true;
+                }
+            });
+            scene.add(object);
+        }, undefined, function (error) {
+            console.error('Error loading OBJ:', error);
+        });
+        
+        // โมเดลของอาจารย์
+        loader.load('https://sibsansuk.github.io/myModel.obj', function (object) {
             // ตั้งค่า castShadow กับทุก mesh ใน object
             object.traverse(function (child) {
                 if (child.isMesh) {
